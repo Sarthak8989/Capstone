@@ -1,34 +1,33 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-
-    <script src="https://code.jquery.com/jquery-3.5.1slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-    <link rel="stylesheet"  type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-
-    <link rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
 
+<nav role="navigation" class="navbar navbar-default real-nav" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.php" class="navbar-brand"><img src='images/hospital-logo.png' class='img-responsive img-logo' style="height: 50px; margin-bottom: 100px;" /></a>
+        </div>
+        <!-- Collection of nav links and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+			
+            <ul class="nav navbar-nav navbar-right">
+			
+                <?php if(!User::loggedIn() && !Patient::isPatientIn() ) {?> 
+               <li><a href='login.php'>Login</a></li>
+               <?php } else {
+                ?> 
 
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-info bg-info">
-        <h5 class="text-white">Hospital Management System</h5>
-        <div class="mr-auto"></div>
-        <ul class="navbar-nav">
-            <li class="nav-item"><a href="" class="nav-link text-white">Admin</a></li>
-        </ul>
-    </nav>
-    <style>
-body {
-  background-image: url('img/bg.jpg');
-}
-</style>
-</body>
-</html>
+               <!-- <li><a href='profile.php?token=<?php //echo $token; ?> '>Hello <?php// echo $userFirstName." ".$userSecondName; ?>,</a></li>--> 
+			    <li><a href='logout.php'>Logout</a></li>
+                <?php 
+               } ?>
+            </ul>
+            
+        </div>
+    </div>
+</nav>
