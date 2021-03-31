@@ -40,7 +40,6 @@ class Patient{
 				array($name, $location, $correctAge, $gender, $phone, $correctDateOfBirth, $time, $diagnosis, $prescriptions, $patientToken, $doctor, $number, $condition )
 		); 
 		
-		Config::redir("print.php?patient=$patientToken"); 
 		
 	}
 	

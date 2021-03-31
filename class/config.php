@@ -6,15 +6,10 @@ class Config{
 	// database
 
 	const DB_HOST = "localhost"; // database host or server
-	const DB_NAME = "hospital"; // the actual name of the system's database [database name]
+	const DB_NAME = "sad"; // the actual name of the system's database [database name]
 	const DB_USER = "root"; // the actual name of database user
-	const DB_PASSWORD = ""; // database password
+	const DB_PASSWORD = "root"; // database password
 
-
-	// SYSTEM 
-
-	const SYSTEM_NAME = "EMR";
-	const SLOGAN = "EMR"; // THIS CAN BE SYSTEM'S TITLE\ 
 
 
 	//METHODS
