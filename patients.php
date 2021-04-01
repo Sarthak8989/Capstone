@@ -26,9 +26,7 @@ if(!User::loggedIn()){
 				</div><!-- end of the content area --> 
 				</div> 
 				
-			</div><!-- col-md-7 --> 
-
-				
+			</div><!-- col-md-7 --> 		
 		</div> 
 	</div> 
 </body>
