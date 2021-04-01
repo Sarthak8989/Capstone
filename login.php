@@ -8,7 +8,7 @@ if(User::loggedIn()){
 
 <html>
 <head>
-	<title>LOGIN - <?php echo CONFIG::SYSTEM_NAME; ?> </title>
+	<title>HMS</title>
 	<?php require_once "include/head.php";  ?> 
 </head>
 <body>
@@ -27,7 +27,6 @@ if(User::loggedIn()){
 
 						<?php 
 							if(isset($_GET['attempt'])){
-								// STARTING THE LOGIN AREA 
 
 								$status = $_GET['attempt'];
 
@@ -36,7 +35,6 @@ if(User::loggedIn()){
 								}
 								echo "<center><div class='badge-header'>$header</div></center>"; 
 
-								// we created a method for creating forms
 
 								if(isset($_POST['login-email'])){
 									$email = $_POST['login-email']; 
@@ -52,8 +50,8 @@ if(User::loggedIn()){
 
 							?> 
 							<div class='row'>
-								<div class='col-md-3'></div>
-								<div class='col-md-6'>
+								<div class='col-md-2'></div>
+								<div class='col-md-8'>
 									<div class='form-holder'>
 										<?php Db::form(array("Email", "Password"), 3, array("login-email", "login-password"), array("text", "password"), "Login"); ?> 
 									</div>
@@ -70,8 +68,8 @@ if(User::loggedIn()){
 						<div class='row'>
 							<div class='col-md-2'></div>
 							<div class='col-md-8'> 
-								<div class='row' style='margin-top: 70px;'> 
-									<div class='col-md-4'>
+								<div class='row' style='margin-top: 50px;'> 
+									<div class='col-md-12'>
 										<center>
 											<div class='img-login-icons'>
 												<img  class='img-responsive' src='images/3678411 - hospital medical nurse.png' alt='login as a doctor' />
@@ -82,7 +80,7 @@ if(User::loggedIn()){
 									</div> 
 								</div> 
 							</div> 
-							<div class='col-md-2'></div>
+							<div class='col-md-8'></div>
 							<?php } ?> 
 						</div><!-- end of the content area --> 
 					</div> 

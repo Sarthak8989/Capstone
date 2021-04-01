@@ -148,7 +148,6 @@ class Patient{
 						<td><strong>Age</strong></td>
 						<td><strong>Attended</strong></td>
 						<td><strong>Doctor</strong></td>
-						<td><strong>Print</strong></td>
 						
 					<tr>
 			"; 
@@ -174,7 +173,6 @@ class Patient{
 						<td>$age</td>
 						<td>$date</td>
 						<td>$docName</td>
-						<td><a href='print.php?patient=$token'>Print</a></td>
 						
 					<tr>
 			"; 
