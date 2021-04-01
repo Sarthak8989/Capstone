@@ -84,6 +84,7 @@ if(User::loggedIn()){
 							<?php } ?> 
 						</div><!-- end of the content area --> 
 					</div> 
+					<!-- Div tag --> 
 				</div>  
 			</div> 
 		</div> 
