@@ -15,13 +15,10 @@ if(User::loggedIn()){
 	<?php require_once "include/header.php"; ?> 
 	<div class='container-fluid'>
 		<div class='row'>
-			<div class='col-md-3'> 
-				<img src='images/doc-background-two-right.png' class='img-responsive' /> 
-			</div>
-			<div class='col-md-9'>
+			<div class='col-md-15'>
 				<div class='content-area'> 
 					<div class='content-header'> 
-						Login <small>Login to access the system</small>
+						Login
 					</div>
 					<div class='content-body'> 
 
@@ -84,7 +81,6 @@ if(User::loggedIn()){
 							<?php } ?> 
 						</div><!-- end of the content area --> 
 					</div> 
-					<!-- Div tag --> 
 				</div>  
 			</div> 
 		</div> 

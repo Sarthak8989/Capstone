@@ -1,10 +1,10 @@
 <?php 
 
 class Patient{
-	public static function add($name, $location, $age, $gender, $phone, $dateOfBirth, $diagnosis, $prescriptions, $doctor, $number, $condition){
+	public static function add($name, $location, $age, $gender, $phone, $dateOfBirth, $diagnosis,$doctor, $number){
 		
 		
-		if($name == "" || $location == "" || $age == "" || $gender == "" || $phone == "" || $dateOfBirth == "" || $diagnosis == "" || $prescriptions == "" || $condition == ""){
+		if($name == "" || $location == "" || $age == "" || $gender == "" || $phone == "" || $dateOfBirth == "" || $diagnosis == "" ){
 			Messages::error("All fields are required"); 
 			return; 
 		}
@@ -15,53 +15,21 @@ class Patient{
 		}
 		
 		
-		$today = strftime(date("d-m-Y", time()));
-		$todayData = explode("-", $today);
-
-		$dataYear = explode("-", $dateOfBirth); 
-		$correctAge = (int) $todayData[2] -  $dataYear[0];
-		
-		$correctDateOfBirth = $dataYear[2]." - ".$dataYear[1]." - ".$dataYear[0];
-		
-		if($age != $correctAge){
-			Messages::error("You have indicated that patient was born $correctDateOfBirth, therefore they cannot be of $age YRS, the correct age should be $correctAge YRS. (".$todayData[2]." - ".$dataYear[0]." = $correctAge YRS). Please correct the details ");
-			return; 
-		}
 		
 		$time = time(); 
 		
 		$patientToken = md5(uniqid().time().unixtojd().$name.$age.$phone); 
 		
-		$diagnosis = str_replace("\n", "<br />", $diagnosis); 
-		$prescriptions = str_replace("\n", "<br />", $prescriptions);
 		
 		Db::insert("patients", 
-				array("name", "location", "age", "gender", "phone", "dateOfBirth", "cTime", "diagnosis", "prescription", "token", "doctor", "number", "pcondition"), 
-				array($name, $location, $correctAge, $gender, $phone, $correctDateOfBirth, $time, $diagnosis, $prescriptions, $patientToken, $doctor, $number, $condition )
+				array("name", "location", "age", "gender", "phone", "dateOfBirth","diagnosis", "number"), 
+				array($name, $location, $age, $gender, $phone, $dateOfBirth,$diagnosis, $number )
 		); 
 		
 		
 	}
 	
-	public static function get($token, $field){
-		$query = Db::fetch("patients", "$field", "token = ? ", $token, "", "", ""); 
-		if(Db::count($query)){
-			$data = Db::num($query); 
-			return $data[0];
-		}
-		
-		Messages::error("Invalid patient token!"); 
-	}
 	
-	public static function getP($number, $field){
-		$query = Db::fetch("patients", "$field", "number = ? ", $number, "", "", 1); 
-		if(Db::count($query)){
-			$data = Db::num($query); 
-			return $data[0];
-		}
-		
-		Messages::error("Invalid patient token!"); 
-	}
 	
 	public static function printP($token){
 		$name = self::get($token, "name");

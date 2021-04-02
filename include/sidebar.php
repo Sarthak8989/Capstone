@@ -22,8 +22,6 @@ if(User::loggedIn()){
 				<li><a href='index.php'><img class='sidebar-menu-icon' src='images/ic_account_balance_wallet_white_24dp.png'  /> Dashboard</a></li>
 				<li><a href='add-patient.php'><img class='sidebar-menu-icon' src='images/ic_assignment_ind_white_24dp.png'  /> Add Patients</a></li>
 				<li><a href='add-doctors.php'><img class='sidebar-menu-icon' src='images/ic_group_add_white.png'  /> Add Doctors</a></li>
-				<li><a href='doctors-record.php'><img class='sidebar-menu-icon' src='images/ic_group_add_white.png'  /> Doctors' Records</a></li>
-				<li><a href='appointments.php'><img class='sidebar-menu-icon' src='images/ic_alarm_white_24dp.png'  /> Appointment</a></li>
 			</ul> 
 		</div> 
 	</div>

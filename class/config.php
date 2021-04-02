@@ -1,15 +1,11 @@
 <?php 
-// this class contains configuration data
 
 class Config{
 
-	// database
-
-	const DB_HOST = "localhost"; // database host or server
-	const DB_NAME = "sad"; // the actual name of the system's database [database name]
-	const DB_USER = "root"; // the actual name of database user
-	const DB_PASSWORD = "root"; // database password
-
+	const DB_HOST = "localhost"; 
+	const DB_NAME = "sad";
+	const DB_USER = "root";
+	const DB_PASSWORD = "root"; 
 
 
 	//METHODS

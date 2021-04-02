@@ -1,25 +1,8 @@
 <?php 
 
-/*
-  This database class contains various db operations in the system .
-  Development of this class was inspired by EMR project (presented by JOYCE NASHA)
-  it contains complex structures that ease database operations in the whole system
-  
-  Copy Righted to MURANGA UNIVERSITY OF TECHNOLOGY
-  Credits to: 
-	TOTONA JOYCE NASHA - MUT STUDENT
-					(BACHELOR OF BUSINESS INFORMATION TECHNOLOGY)
-	
-	GLORY BE TO GOD
-*/
 class Db{
 
 	public static function returnedSQlError($e){
-		// $e should be exception raised if the sql fails
-		// you can edit this to decide what happens if anything goes wrong within your queries
-		// this method should not return anything, it will be treated as void method
-		// $e can be any message, four our case were are relying on default sql error behavior
-		// you can use die($e->getMessage()); to get definite message
 		die($e);
 	}
 
@@ -32,8 +15,7 @@ class Db{
 			self::returnedSQlError($e); 
 		}
 
-		return $db;// always connect to the database when necessary and kill the  connection when done please;
-	
+		return $db;	
 	}
 
 	public static function insert($table, array $columns, array $colValues ){
@@ -85,10 +67,8 @@ class Db{
 	}
 
 
-	public static function update($table, array $columns,  array $colValues, $where, $whereValue){
-		// whereValue can take an array if where clause has more than one data
-        // Db::update("test", array("email", "name", "location"), array("bensonkarue30@gmail.com.com", "benson", "karatina"), "hotelId = ? ", "hotelId"); 
-        // update table set col1 = 2, col2 = 3, col4 =5 WHERE ( WHERE  some = ? and another some  = ? )
+	/*public static function update($table, array $columns,  array $colValues, $where, $whereValue){
+	
         $con = Db::connect(); 
         try{
 
@@ -157,10 +137,7 @@ class Db{
 	}
 
 	public static function delete($table, $where, $whereValue){
-		// Db::fetchAll("tableName", "col = ? ", "id DESC");
-		// this just gives you flexibility
-		// if where clause contains more than one condition, then where values must be an array
-		// check this
+		
 		$con = self::connect();
 		try{
 			
@@ -187,7 +164,7 @@ class Db{
 			die($e->getMessage()); 
 		}
 	}
-
+*/
 
 	// this method (Db::fetchAll(params)) is deprecated, use Db::fetch(params) instead
 	public static function fetchAll($table, $where, $whereValue, $order,$limit){
