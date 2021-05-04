@@ -8,7 +8,7 @@ if(!User::loggedIn()){
 
 <html>
 <head>
-	<title>ADMIN | Home </title>
+	<title>Home </title>
 	<?php require_once "include/head.php";  ?> 
 </head>
 <body>
@@ -19,16 +19,16 @@ if(!User::loggedIn()){
 			<div class='col-md-9'>
 				<div class='content-area'> 
 				<div class='content-header'> 
-					Dashboard <small>View your dashboard</small>
+					Dashboard
 				</div>
 				<div class='content-body'>
 					<div class='row'>
 						<?php Dashboard::draw("Doctors", Dashboard::doctors(),  "doctors-record.php");?>
 						<?php Dashboard::draw("Patients", Dashboard::patients(),  "patients.php") ?>
+						<?php Dashboard::draw("Change Password", "",  "change-password.php"); ?>
 					</div>
 				</div>
 				</div> 
-				
 			</div> 
 				
 		</div> 

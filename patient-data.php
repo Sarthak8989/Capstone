@@ -1,13 +1,12 @@
 <?php 
 require_once "importance.php"; 
 
-if(!User::loggedIn()){
-	Config::redir("login.php"); 
-}
+
 ?> 
 
 <html>
 <head>
+	<title>Patient Details</title>
 	<?php require_once "include/head.php";  ?> 
 </head>
 <body>
@@ -18,15 +17,16 @@ if(!User::loggedIn()){
 			<div class='col-md-10'>
 				<div class='content-area'> 
 				<div class='content-header'> 
-					Patients <small>Patients' book record</small>
+					Patient Data <small>this is your data</small>
 				</div>
 				<div class='content-body'> 
-					<?php Patient::patientsBooks(); ?> 
-				</div>
+					<div class='form-holder'> 
+						<?php Patient::getPatientData($_SESSION['patient']); ?>
+					</div> 
+				</div><!-- end of the content area --> 
 				</div> 
 				
-			</div><!-- col-md-7 --> 
-
+			</div><!-- col-md-7 -->
 				
 		</div> 
 	</div> 

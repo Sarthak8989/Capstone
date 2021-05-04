@@ -8,6 +8,7 @@ if(!User::loggedIn()){
 
 <html>
 <head>
+	<title>Profile</title>
 	<?php require_once "include/head.php";  ?> 
 </head>
 <body>
@@ -15,18 +16,22 @@ if(!User::loggedIn()){
 	<div class='container-fluid'>
 		<div class='row'>
 			<div class='col-md-2'><?php require_once "include/sidebar.php"; ?></div> <!-- this should be a sidebar --> 
-			<div class='col-md-10'>
+			<div class='col-md-7'>
 				<div class='content-area'> 
 				<div class='content-header'> 
-					Patients <small>Patients' book record</small>
+					<?php echo "$userFirstName $userSecondName" ; ?> <small><?php echo $userRole; ?></small>
 				</div>
 				<div class='content-body'> 
-					<?php Patient::patientsBooks(); ?> 
-				</div>
+					
+					<?php $token = $_GET['token']; User::profile($token);  ?>
+				</div><!-- end of the content area --> 
 				</div> 
 				
 			</div><!-- col-md-7 --> 
 
+			<div class='col-md-3'>
+				<img src='images/doc-background-one.png' class='img-responsive' /> 
+			</div> <!-- this should be a sidebar -->
 				
 		</div> 
 	</div> 

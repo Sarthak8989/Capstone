@@ -29,8 +29,6 @@ if(User::loggedIn()){
 	$userGender = User::get($token, "gender");
 	$userRole = User::get($token, "role");
 	
-	
-	
 	if($userStatus == 1){
 		$userRole = "Admin";
 	} else {

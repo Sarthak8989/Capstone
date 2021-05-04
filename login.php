@@ -8,32 +8,32 @@ if(User::loggedIn()){
 
 <html>
 <head>
-	<title>HMS</title>
+	<title>LOGIN - HMS </title>
 	<?php require_once "include/head.php";  ?> 
 </head>
 <body>
 	<?php require_once "include/header.php"; ?> 
-	<div class='container-fluid'>
+	<div class='container-fluid' >
 		<div class='row'>
-			<div class='col-md-15'>
+			<div class='col-md-12'>
 				<div class='content-area'> 
 					<div class='content-header'> 
-						Login
+						Login <small>Login to access the system</small>
 					</div>
 					<div class='content-body'> 
 
 						<?php 
 							if(isset($_GET['attempt'])){
-
 								$status = $_GET['attempt'];
 
 								if($status == 1){
 									$header = "Login as an Admin"; 
+								} else {
+									$header = "Login as a Doctor"; 
 								}
+
 								echo "<center><div class='badge-header'>$header</div></center>"; 
-
-
-								if(isset($_POST['login-email'])){
+					if(isset($_POST['login-email'])){
 									$email = $_POST['login-email']; 
 									$password = $_POST['login-password'];
 
@@ -47,8 +47,8 @@ if(User::loggedIn()){
 
 							?> 
 							<div class='row'>
-								<div class='col-md-2'></div>
-								<div class='col-md-8'>
+								<div class='col-md-3'></div>
+								<div class='col-md-6'>
 									<div class='form-holder'>
 										<?php Db::form(array("Email", "Password"), 3, array("login-email", "login-password"), array("text", "password"), "Login"); ?> 
 									</div>
@@ -56,7 +56,6 @@ if(User::loggedIn()){
 								<div class='col-md-3'></div>
 							</div> 
 							<?php 
-								// ENDNG TGHE LOGIN AREA
 							} else {
 
 						?>
@@ -65,8 +64,8 @@ if(User::loggedIn()){
 						<div class='row'>
 							<div class='col-md-2'></div>
 							<div class='col-md-8'> 
-								<div class='row' style='margin-top: 50px;'> 
-									<div class='col-md-12'>
+								<div class='row' style='margin-top: 70px;'> 
+									<div class='col-md-4'>
 										<center>
 											<div class='img-login-icons'>
 												<img  class='img-responsive' src='images/3678411 - hospital medical nurse.png' alt='login as a doctor' />
@@ -75,9 +74,29 @@ if(User::loggedIn()){
 
 										</center> 
 									</div> 
+									<div class='col-md-4'> 
+
+										<center>
+											<div class='img-login-icons'>
+												<img  class='img-responsive' src='images/3678412 - doctor medical care medical help stethoscope.png' alt='login as a doctor' />
+											</div>
+											<center><a href='login.php?attempt=2'><div class='badge-header'>Doctor</div></a></center> 
+										</center>
+									</div> 
+									
+									<div class='col-md-4'> 
+
+										<center>
+											<div class='img-login-icons'>
+												<img  class='img-responsive' src='images/3678443 - ambulance fast fast hospital.png' alt='login as a doctor' />
+											</div>
+											<center><a href='login-patient.php'><div class='badge-header'>Patient</div></a></center> 
+										</center>
+									</div> 
+									
 								</div> 
 							</div> 
-							<div class='col-md-8'></div>
+							<div class='col-md-2'></div>
 							<?php } ?> 
 						</div><!-- end of the content area --> 
 					</div> 

@@ -22,7 +22,6 @@
                <?php } else {
                 ?> 
 
-               <!-- <li><a href='profile.php?token=<?php //echo $token; ?> '>Hello <?php// echo $userFirstName." ".$userSecondName; ?>,</a></li>--> 
 			    <li><a href='logout.php'>Logout</a></li>
                 <?php 
                } ?>

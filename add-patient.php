@@ -25,10 +25,10 @@ if(!User::loggedIn()){
 				</div>
 				<?php require_once "include/alert.php";  ?> 
 				<div class='content-body'>
-					<div class='form-holder' style='margin-top: 30px;'>
+					<div class='form-holder' style='margin-top: 20px;'>
 					    <div class='badge-header'>Patient Details</div> 
-						
-							<?php
+					
+						<?php
 						
 						if(isset($_GET['p-number'])){
 							$patientNumber = $_GET['p-number'];
@@ -36,6 +36,7 @@ if(!User::loggedIn()){
 							
 							$name = $_GET['name'];
 							$location = $_GET['location'];
+							$age = $_GET['age'];
 							$gender = $_GET['gender'];
 							$phone = $_GET['phone'];
 							$dateOfBirth = $_GET['dateOfBirth'];
@@ -45,7 +46,8 @@ if(!User::loggedIn()){
 							$dateOfBirth = preg_replace("#[^0-9-]#", "", $dataBirth[2]."-".$dataBirth[1]."-".$dataBirth[0]);
 							
 							$diagnosis = "";
-							
+							$prescription = "";
+							$condition = "";
 						} else {
 							$patientNumber = substr(preg_replace("#[^0-9]#", "", md5(uniqid().time())), 0, 4);
 							echo "<h3 style='color: #EF3235;'>Patient Number: <strong>$patientNumber</strong></h3>";
@@ -56,6 +58,7 @@ if(!User::loggedIn()){
 							$phone = "";
 							$dateOfBirth = "";
 							$diagnosis = "";
+							$prescription = "";
 							$condition = "";
 						}
 						
@@ -69,9 +72,11 @@ if(!User::loggedIn()){
 							$phone = $_POST['p-phone'];
 							$dateOfBirth = $_POST['p-birth'];
 							$diagnosis = $_POST['p-diagnosis']; 
+							$prescription = $_POST['p-prescription'];
 							$gender = $_POST['gender']; 
+							$condition = $_POST['condition'];
 							
-							Patient::add($name, $location, $age, $gender, $phone, $dateOfBirth, $diagnosis, User::getToken(), $patientNumber); 
+							Patient::add($name, $location, $age, $gender, $phone, $dateOfBirth, $diagnosis, $prescription, User::getToken(), $patientNumber, $condition); 
 						}
 						
 						$form = new Form(3, "post");
@@ -82,7 +87,9 @@ if(!User::loggedIn()){
 						$form->textBox("Phone", "p-phone", "number",  "$phone", "");
 						$form->textBox("Date of Birth", "p-birth", "date", "$dateOfBirth", "");	
 						$form->textarea("Diagnosis/ Symptoms", "p-diagnosis", "$diagnosis");
+						$form->textarea("Prescription", "p-prescription", "$prescription");
 						$form->select("Gender", "gender", "$gender", array("Male", "Female", "Other") );
+						$form->select("Condition", "condition", "$condition", array("Admited","Not-Admited") );
 						$form->close("Submit"); 
 						
 						
@@ -91,7 +98,11 @@ if(!User::loggedIn()){
 				</div><!-- end of the content area --> 
 				</div> 
 				
-			</div><!-- col-md-7 -->
+			</div><!-- col-md-7 --> 
+
+			<div class='col-md-3'>
+				<img src='images/doc-background-one.png' class='img-responsive' /> 
+			</div> <!-- this should be a sidebar -->
 				
 		</div> 
 	</div> 

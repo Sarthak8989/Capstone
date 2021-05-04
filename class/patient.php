@@ -1,10 +1,10 @@
 <?php 
 
 class Patient{
-	public static function add($name, $location, $age, $gender, $phone, $dateOfBirth, $diagnosis,$doctor, $number){
+	public static function add($name, $location, $age, $gender, $phone, $dateOfBirth, $diagnosis, $prescriptions, $doctor, $number, $condition){
 		
 		
-		if($name == "" || $location == "" || $age == "" || $gender == "" || $phone == "" || $dateOfBirth == "" || $diagnosis == "" ){
+		if($name == "" || $location == "" || $age == "" || $gender == "" || $phone == "" || $dateOfBirth == "" || $diagnosis == "" || $prescriptions == "" || $condition == ""){
 			Messages::error("All fields are required"); 
 			return; 
 		}
@@ -15,21 +15,54 @@ class Patient{
 		}
 		
 		
+		$today = strftime(date("d-m-Y", time()));
+		$todayData = explode("-", $today);
+
+		$dataYear = explode("-", $dateOfBirth); 
+		$correctAge = (int) $todayData[2] -  $dataYear[0];
+		
+		$correctDateOfBirth = $dataYear[2]." - ".$dataYear[1]." - ".$dataYear[0];
+		
+		if($age != $correctAge){
+			Messages::error("You have indicated that patient was born $correctDateOfBirth, therefore they cannot be of $age YRS, the correct age should be $correctAge YRS. (".$todayData[2]." - ".$dataYear[0]." = $correctAge YRS). Please correct the details ");
+			return; 
+		}
 		
 		$time = time(); 
 		
 		$patientToken = md5(uniqid().time().unixtojd().$name.$age.$phone); 
 		
+		$diagnosis = str_replace("\n", "<br />", $diagnosis); 
+		$prescriptions = str_replace("\n", "<br />", $prescriptions);
 		
 		Db::insert("patients", 
-				array("name", "location", "age", "gender", "phone", "dateOfBirth","diagnosis", "number"), 
-				array($name, $location, $age, $gender, $phone, $dateOfBirth,$diagnosis, $number )
+				array("name", "location", "age", "gender", "phone", "dateOfBirth", "cTime", "diagnosis", "prescription", "token", "doctor", "number", "pcondition"), 
+				array($name, $location, $correctAge, $gender, $phone, $correctDateOfBirth, $time, $diagnosis, $prescriptions, $patientToken, $doctor, $number, $condition )
 		); 
+		Messages::success("Patient has been added successfully");
 		
 		
 	}
 	
+	public static function get($token, $field){
+		$query = Db::fetch("patients", "$field", "token = ? ", $token, "", "", ""); 
+		if(Db::count($query)){
+			$data = Db::num($query); 
+			return $data[0];
+		}
+		
+		Messages::error("Invalid patient token!"); 
+	}
 	
+	public static function getP($number, $field){
+		$query = Db::fetch("patients", "$field", "number = ? ", $number, "", "", 1); 
+		if(Db::count($query)){
+			$data = Db::num($query); 
+			return $data[0];
+		}
+		
+		Messages::error("Invalid patient token!"); 
+	}
 	
 	public static function printP($token){
 		$name = self::get($token, "name");
@@ -111,16 +144,17 @@ class Patient{
 			
 		    echo "
 					<tr>
+						<td><strong>Patient Number</strong></td>
 						<td><strong>Name</strong></td>
 						<td><strong>Location</strong></td>
 						<td><strong>Age</strong></td>
 						<td><strong>Attended</strong></td>
 						<td><strong>Doctor</strong></td>
-						
 					<tr>
 			"; 
 			while($data = Db::assoc($query)){
 				$token = $data['token'];
+				$number = self::get($token, "number");
 				$name = self::get($token, "name");
 				$location = self::get($token, "location"); 
 				$age = self::get($token, "age"); 
@@ -136,12 +170,12 @@ class Patient{
 				
 				echo "
 					<tr>
+						<td>$number</td>
 						<td>$name</td>
 						<td>$location</td>
 						<td>$age</td>
 						<td>$date</td>
 						<td>$docName</td>
-						
 					<tr>
 			"; 
 			}
@@ -209,7 +243,7 @@ class Patient{
 		
 		Table::start();
 		
-		$heading = array("Name", "Location", "Age", "Phone", "Date of Birth", "Served On:", "Diagnosis", "Prescriptions", "Served By", "Print");
+		$heading = array("Name", "Location", "Age", "Phone", "Date of Birth", "Served On:", "Diagnosis", "Prescriptions", "Served By");
 		$body = array();
 		Table::header($heading); 
 		
@@ -229,7 +263,7 @@ class Patient{
 			$doctorFirstName = User::get($doctor, "firstName"); 
 			$doctorSecondName = User::get($doctor, "secondName");
 			$servedBy = "Served by $doctorFirstName $doctorSecondName";
-			Table::body(array($name, $location, $age, $phone, $dateOfBirth, $date, $diagnosis, $prescription, $servedBy, "<a href='print.php?patient=$token'>Print & Download</a>"));
+			Table::body(array($name, $location, $age, $phone, $dateOfBirth, $date, $diagnosis, $prescription, $servedBy));
 			//array_push($body, ); 
 			
 		}

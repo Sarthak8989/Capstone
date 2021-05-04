@@ -8,6 +8,7 @@ if(!User::loggedIn()){
 
 <html>
 <head>
+	<title></title>
 	<?php require_once "include/head.php";  ?> 
 </head>
 <body>
@@ -18,15 +19,17 @@ if(!User::loggedIn()){
 			<div class='col-md-10'>
 				<div class='content-area'> 
 				<div class='content-header'> 
-					Patients <small>Patients' book record</small>
+					Doctors <small>Doctors' Records</small>
 				</div>
+				<?php require_once "include/alert.php";  ?> 
 				<div class='content-body'> 
-					<?php Patient::patientsBooks(); ?> 
-				</div>
+					<?php Doctor::load(); ?> 
+				</div><!-- end of the content area --> 
 				</div> 
 				
 			</div><!-- col-md-7 --> 
 
+			
 				
 		</div> 
 	</div> 
